@@ -34,7 +34,7 @@ function Login({ onLogin }) {
     e.preventDefault();
     setBusy(true); setError("");
     try {
-      const data = await request("/auth/login", null, {
+      const data = await request("/api/auth/login", null, {
         method: "POST", body: JSON.stringify({ email, password })
       });
       onLogin(data);
