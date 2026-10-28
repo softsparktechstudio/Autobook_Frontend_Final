@@ -8,22 +8,27 @@ import {
   Menu, Plus, RefreshCw, Search, ShieldCheck, Wallet, X, ReceiptText, Scale, Users, FilePlus2, IndianRupee, MessageCircle, Send, Bot
 } from "lucide-react";
 
-const API = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+const API =
+  import.meta.env.VITE_API_URL ||
+  "http://localhost:5000/api";
 
 async function request(path, token, options = {}) {
-  const response = await fetch(`${API}${path}`, {
+  const url = `${API.replace(/\/+$/, "")}/${path.replace(/^\/+/, "")}`;
+
+  const response = await fetch(url, {
     ...options,
     headers: {
-      "Content-Type": "application/json",
+      ...(options.headers || {}),
       ...(token ? { Authorization: `Bearer ${token}` } : {}),
-      ...(options.headers || {})
-    }
+    },
   });
-  const data = await response.json().catch(() => ({}));
-  if (!response.ok) throw new Error(data.error || `Request failed (${response.status})`);
-  return data;
-}
 
+  if (!response.ok) {
+    throw new Error(`Request failed: ${response.status}`);
+  }
+
+  return response.json();
+}
 function Login({ onLogin }) {
   const [email, setEmail] = useState("admin@softspark.local");
   const [password, setPassword] = useState("LocalAdmin123!");
