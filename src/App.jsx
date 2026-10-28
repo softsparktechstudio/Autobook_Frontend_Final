@@ -187,15 +187,15 @@ function App() {
     setLoading(true);
     try {
       const [org, company, years, accounts, journals, trialBalance, parties, invoices, purchaseBills] = await Promise.all([
-        request("/organization", token),
-        request("/company", token),
-        request("/financial-years", token),
-        request("/accounts", token),
-        request("/journals", token),
-        request("/reports/trial-balance", token),
-        request("/parties", token),
-        request("/sales-invoices", token),
-        request("/purchase-bills", token)
+        request("api/organization", token),
+        request("api/company", token),
+        request("api/financial-years", token),
+        request("api/accounts", token),
+        request("api/journals", token),
+        request("api/reports/trial-balance", token),
+        request("api/parties", token),
+        request("api/sales-invoices", token),
+        request("api/purchase-bills", token)
       ]);
       setData({ organization: org.organization, company: company.company, years: years.financialYears, accounts: accounts.accounts, journals: journals.journals, trialBalance, parties: parties.parties, invoices: invoices.invoices, purchaseBills: purchaseBills.purchaseBills });
     } catch (err) {
