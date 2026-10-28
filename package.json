@@ -1,6 +1,6 @@
 {
-  "name": "autobooks-core-web",
-  "version": "1.0.0",
+  "name": "autobooks-enterprise-web",
+  "version": "3.0.0",
   "private": true,
   "type": "module",
   "scripts": {
